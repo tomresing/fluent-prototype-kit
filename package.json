@@ -1,0 +1,49 @@
+{
+  "name": "fluent-prototype-kit",
+  "version": "0.1.0",
+  "description": "A rapid prototyping toolkit for Microsoft Fluent Design System using Fluent UI React v9",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=packages/starter",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "eslint packages/**/*.{ts,tsx} --fix",
+    "format": "prettier --write \"packages/**/*.{ts,tsx,json,md}\"",
+    "clean": "rimraf packages/*/dist packages/*/.turbo node_modules/.cache"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomresing/fluent-prototype-kit.git"
+  },
+  "keywords": [
+    "fluent-ui",
+    "react",
+    "prototyping",
+    "design-system",
+    "microsoft",
+    "fluent-design"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tomresing/fluent-prototype-kit/issues"
+  },
+  "homepage": "https://github.com/tomresing/fluent-prototype-kit#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^9.9.0",
+    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "prettier": "^3.3.3",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.5.4"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
