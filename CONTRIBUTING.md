@@ -1,42 +1,40 @@
-# Contributing to Fluent Prototype Kit
+# Contributing
 
-Thank you for your interest in contributing! This document provides guidelines for contributing to the project.
+Thank you for contributing to Fluent Prototype Kit.
 
-## Development Setup
+## Development setup
 
 1. Fork and clone the repository
 2. Install dependencies: `npm install`
 3. Create a branch: `git checkout -b feature/your-feature`
 4. Make your changes
-5. Run tests: `npm test`
-6. Lint code: `npm run lint`
-7. Format code: `npm run format`
-8. Commit and push your changes
-9. Open a pull request
+5. Lint: `npm run lint`
+6. Format: `npm run format`
+7. Commit and push
+8. Open a pull request
 
-## Project Structure
+## Project structure
 
-- `packages/cli` - Command-line tools
-- `packages/runtime` - Core framework components
-- `packages/starter` - Starter template
+- `packages/runtime` - Express API with session management
+- `packages/starter` - React app with Fluent UI v9
 - `docs/` - Documentation
 - `examples/` - Example prototypes
 
-## Coding Standards
+## Standards
 
-- Use TypeScript for all new code
-- Follow the existing code style (enforced by ESLint/Prettier)
-- Write tests for new features
-- Update documentation as needed
-- Keep commits atomic and well-described
+- Use TypeScript
+- Follow existing code style (ESLint and Prettier)
+- Update documentation
+- Keep commits focused and descriptive
+- Apply Microsoft Writing Style (sentence case, concise)
 
-## Pull Request Process
+## Pull requests
 
-1. Update the README.md with details of changes if applicable
-2. Update the documentation in the `docs/` folder
-3. Ensure all tests pass
+1. Update README.md if needed
+2. Update documentation in `docs/`
+3. Ensure lint passes
 4. Request review from maintainers
 
-## Code of Conduct
+## Code of conduct
 
-Be respectful, inclusive, and constructive in all interactions.
+Be respectful and constructive.
