@@ -5,6 +5,7 @@ import {
   Button,
   Card,
   CardHeader,
+  Link,
   makeStyles,
   tokens,
 } from '@fluentui/react-components';
@@ -57,17 +58,24 @@ export function HomePage() {
     <div className={styles.container}>
       <div className={styles.header}>
         <RocketFilled fontSize={48} />
-        <Title1>Fluent Prototype Kit</Title1>
+        <Title1>Fluent prototype kit</Title1>
       </div>
 
       <Text size={500} align="center">
-        A rapid prototyping toolkit for Microsoft Fluent Design System using Fluent UI React v9
+        A rapid prototyping toolkit for Microsoft's {' '}
+        <Link href="https://fluent2.microsoft.design/" target="_blank">
+          Fluent 2
+        </Link>{' '}
+        design system using {' '}
+        <Link href="https://react.fluentui.dev/" target="_blank">
+          Fluent UI React v9.
+        </Link>
       </Text>
 
       <div className={styles.grid}>
         <Card className={styles.card}>
           <CardHeader
-            header={<Title2 as="h3">Session Management</Title2>}
+            header={<Title2 as="h3">Session management</Title2>}
             description={<Text>Persist data across pages and browser sessions</Text>}
           />
           <div className={styles.cardContent}>
@@ -85,14 +93,14 @@ export function HomePage() {
               iconPosition="after"
               onClick={() => navigate('/session-demo')}
             >
-              Try Session Demo
+              Try session demo
             </Button>
           </div>
         </Card>
 
         <Card className={styles.card}>
           <CardHeader
-            header={<Title2 as="h3">Multi-Page Forms</Title2>}
+            header={<Title2 as="h3">Multi-step forms</Title2>}
             description={<Text>Build complex user journeys with multiple steps</Text>}
           />
           <div className={styles.cardContent}>
@@ -110,32 +118,7 @@ export function HomePage() {
               iconPosition="after"
               onClick={() => navigate('/form')}
             >
-              Start Form Journey
-            </Button>
-          </div>
-        </Card>
-
-        <Card className={styles.card}>
-          <CardHeader
-            header={<Title2 as="h3">50+ Components</Title2>}
-            description={<Text>Production-ready Fluent UI React v9 components</Text>}
-          />
-          <div className={styles.cardContent}>
-            <Text>
-              • Buttons, inputs, dropdowns
-              <br />
-              • Data tables and lists
-              <br />
-              • Navigation and menus
-              <br />• Cards, dialogs, and more
-            </Text>
-            <Button
-              appearance="primary"
-              icon={<ArrowRightFilled />}
-              iconPosition="after"
-              onClick={() => window.open('https://react.fluentui.dev/', '_blank')}
-            >
-              View Components
+              Start form journey
             </Button>
           </div>
         </Card>
@@ -143,16 +126,22 @@ export function HomePage() {
 
       <Card style={{ width: '100%' }}>
         <div className={styles.cardContent}>
-          <Title2>Phase 1.3 Complete ✅</Title2>
+          <Title2>Phase 1.7 complete ✅</Title2>
           <Text>
-            <strong>React Router Integration</strong> - Multi-page navigation with client-side
-            routing
+            <strong>Multi-step form with enhanced UX</strong> - Session management, keyboard shortcuts, auto-focus, data persistence, and simplified Microsoft Writing Style
           </Text>
           <Text size={300}>
-            Navigate between pages using the menu above. Try the Session Demo to see data
-            persistence in action, or start the multi-step form to experience a complete user
-            journey.
+            This prototype demonstrates a complete registration flow with session-based data storage,
+            accessible form patterns, and clean UI following Fluent Design principles.
           </Text>
+          <Button
+            appearance="secondary"
+            icon={<ArrowRightFilled />}
+            iconPosition="after"
+            onClick={() => window.open('https://github.com/tomresing/fluent-prototype-kit', '_blank')}
+          >
+            View on GitHub
+          </Button>
         </div>
       </Card>
     </div>

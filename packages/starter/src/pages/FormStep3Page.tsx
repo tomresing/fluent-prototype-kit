@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import {
   Button,
-  Textarea,
+  Input,
   Field,
   Card,
   Title1,
@@ -13,6 +13,7 @@ import {
 import { ArrowLeftFilled, CheckmarkFilled } from '@fluentui/react-icons';
 import { useNavigate } from 'react-router-dom';
 import { usePrototypeData } from '../hooks/usePrototypeData';
+import { FormDisclaimer } from '../components/FormDisclaimer';
 
 const useStyles = makeStyles({
   container: {
@@ -46,6 +47,9 @@ const useStyles = makeStyles({
   stepActive: {
     backgroundColor: tokens.colorBrandBackground,
   },
+  stepComplete: {
+    backgroundColor: tokens.colorPaletteGreenBackground3,
+  },
   buttonGroup: {
     display: 'flex',
     gap: '12px',
@@ -53,26 +57,24 @@ const useStyles = makeStyles({
 });
 
 interface FormData {
-  name: string;
   email: string;
-  company: string;
-  role: string;
-  message: string;
+  accountType: string;
+  fullName: string;
 }
 
 export function FormStep3Page() {
   const styles = useStyles();
   const navigate = useNavigate();
   const { data, setData, loading } = usePrototypeData<FormData>('multi-step-form');
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const [formValues, setFormValues] = useState<FormData>({
-    name: '',
     email: '',
-    company: '',
-    role: '',
-    message: '',
+    accountType: '',
+    fullName: '',
   });
+
+  const [errors, setErrors] = useState<Partial<FormData>>({});
 
   useEffect(() => {
     // Wait for loading to complete before checking data
@@ -80,18 +82,33 @@ export function FormStep3Page() {
     
     if (data) {
       setFormValues(data);
-      textareaRef.current?.focus();
+      inputRef.current?.focus();
     } else {
-      navigate('/form');
+      navigate('/form/step-1');
     }
   }, [data, loading, navigate]);
 
+  const validate = () => {
+    const newErrors: Partial<FormData> = {};
+    if (!formValues.fullName.trim()) {
+      newErrors.fullName = 'Full name is required';
+    }
+    return newErrors;
+  };
+
   const handleSubmit = async () => {
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
     try {
       await setData(formValues);
       navigate('/confirmation');
     } catch (error) {
       console.error('Failed to save form data:', error);
+      setErrors({ fullName: 'Failed to save data. Please try again.' });
     }
   };
 
@@ -108,7 +125,7 @@ export function FormStep3Page() {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && e.ctrlKey) {
+    if (e.key === 'Enter') {
       e.preventDefault();
       handleSubmit();
     }
@@ -116,27 +133,31 @@ export function FormStep3Page() {
 
   return (
     <div className={styles.container}>
-      <Title1>Multi-Step Form - Step 3</Title1>
+      <FormDisclaimer />
+      
+      <Title1>Step 3 of 3</Title1>
 
       <Card className={styles.card}>
         <div className={styles.content}>
           <div className={styles.progress}>
-            <div className={`${styles.step} ${styles.stepActive}`} />
-            <div className={`${styles.step} ${styles.stepActive}`} />
+            <div className={`${styles.step} ${styles.stepComplete}`} />
+            <div className={`${styles.step} ${styles.stepComplete}`} />
             <div className={`${styles.step} ${styles.stepActive}`} />
           </div>
 
-          <Title2>Additional Information</Title2>
-          <Text>Any additional comments or questions?</Text>
+          <Title2>Name</Title2>
 
-          <Field label="Message (Optional)">
-            <Textarea
-              ref={textareaRef}
-              value={formValues.message}
-              onChange={(e) => setFormValues({ ...formValues, message: e.target.value })}
+          <Field
+            label="Full name"
+            required
+            validationMessage={errors.fullName}
+            validationState={errors.fullName ? 'error' : undefined}
+          >
+            <Input
+              ref={inputRef}
+              value={formValues.fullName}
+              onChange={(e) => setFormValues({ ...formValues, fullName: e.target.value })}
               onKeyDown={handleKeyDown}
-              placeholder="Tell us anything you'd like... (Press Ctrl+Enter to submit)"
-              rows={6}
             />
           </Field>
 

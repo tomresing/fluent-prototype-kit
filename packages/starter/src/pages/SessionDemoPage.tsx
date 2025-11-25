@@ -17,7 +17,7 @@ export function SessionDemoPage() {
 
   return (
     <div className={styles.container}>
-      <Title1>Session Management Demo</Title1>
+      <Title1>Session management demo</Title1>
       <Text>
         This demonstrates how prototype data persists across pages using server-side sessions.
       </Text>

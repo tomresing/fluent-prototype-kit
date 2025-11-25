@@ -6,13 +6,13 @@ import {
   Card,
   Title1,
   Title2,
-  Text,
   makeStyles,
   tokens,
 } from '@fluentui/react-components';
 import { ArrowRightFilled } from '@fluentui/react-icons';
 import { useNavigate } from 'react-router-dom';
 import { usePrototypeData } from '../hooks/usePrototypeData';
+import { FormDisclaimer } from '../components/FormDisclaimer';
 
 const useStyles = makeStyles({
   container: {
@@ -49,11 +49,9 @@ const useStyles = makeStyles({
 });
 
 interface FormData {
-  name: string;
   email: string;
-  company: string;
-  role: string;
-  message: string;
+  accountType: string;
+  fullName: string;
 }
 
 export function FormPage() {
@@ -63,11 +61,9 @@ export function FormPage() {
   const firstInputRef = useRef<HTMLInputElement>(null);
 
   const [formValues, setFormValues] = useState<FormData>({
-    name: data?.name || '',
     email: data?.email || '',
-    company: data?.company || '',
-    role: data?.role || '',
-    message: data?.message || '',
+    accountType: data?.accountType || '',
+    fullName: data?.fullName || '',
   });
 
   const [errors, setErrors] = useState<Partial<FormData>>({});
@@ -85,9 +81,11 @@ export function FormPage() {
 
   const validateStep1 = () => {
     const newErrors: Partial<FormData> = {};
-    if (!formValues.name.trim()) newErrors.name = 'Name is required';
-    if (!formValues.email.trim()) newErrors.email = 'Email is required';
-    else if (!/\S+@\S+\.\S+/.test(formValues.email)) newErrors.email = 'Email is invalid';
+    if (!formValues.email.trim()) {
+      newErrors.email = 'Email address is required';
+    } else if (!/\S+@\S+\.\S+/.test(formValues.email)) {
+      newErrors.email = 'Enter a valid email address';
+    }
     return newErrors;
   };
 
@@ -108,7 +106,7 @@ export function FormPage() {
     } catch (error) {
       console.error('Failed to save form data:', error);
       // Show error to user
-      setErrors({ name: 'Failed to save data. Please try again.' });
+      setErrors({ email: 'Failed to save data. Please try again.' });
     }
   };
 
@@ -121,7 +119,9 @@ export function FormPage() {
 
   return (
     <div className={styles.container}>
-      <Title1>Multi-Step Form - Step 1</Title1>
+      <FormDisclaimer />
+      
+      <Title1>Step 1 of 3</Title1>
 
       <Card className={styles.card}>
         <div className={styles.content}>
@@ -131,36 +131,20 @@ export function FormPage() {
             <div className={styles.step} />
           </div>
 
-          <Title2>Personal Information</Title2>
-          <Text>Please provide your basic information to continue.</Text>
+          <Title2>Email</Title2>
 
           <Field
-            label="Full Name"
-            required
-            validationMessage={errors.name}
-            validationState={errors.name ? 'error' : undefined}
-          >
-            <Input
-              ref={firstInputRef}
-              value={formValues.name}
-              onChange={(e) => setFormValues({ ...formValues, name: e.target.value })}
-              onKeyDown={handleKeyDown}
-              placeholder="John Doe"
-            />
-          </Field>
-
-          <Field
-            label="Email"
+            label="Email address"
             required
             validationMessage={errors.email}
             validationState={errors.email ? 'error' : undefined}
           >
             <Input
+              ref={firstInputRef}
               type="email"
               value={formValues.email}
               onChange={(e) => setFormValues({ ...formValues, email: e.target.value })}
               onKeyDown={handleKeyDown}
-              placeholder="john.doe@example.com"
             />
           </Field>
 
@@ -170,7 +154,7 @@ export function FormPage() {
             iconPosition="after"
             onClick={handleNext}
           >
-            Next Step
+            Continue
           </Button>
         </div>
       </Card>

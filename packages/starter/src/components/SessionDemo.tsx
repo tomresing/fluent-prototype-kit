@@ -88,7 +88,7 @@ export function SessionDemo() {
   return (
     <Card className={styles.card}>
       <CardHeader
-        header={<Title2>Session Management Demo</Title2>}
+        header={<Title2>Session management demo</Title2>}
         description={
           <Text>
             This form demonstrates session-based data persistence. Your data is saved in the
@@ -107,7 +107,6 @@ export function SessionDemo() {
           <Input
             value={formValues.name}
             onChange={(e) => setFormValues({ ...formValues, name: e.target.value })}
-            placeholder="Enter your name"
           />
         </Field>
 
@@ -116,7 +115,6 @@ export function SessionDemo() {
             type="email"
             value={formValues.email}
             onChange={(e) => setFormValues({ ...formValues, email: e.target.value })}
-            placeholder="Enter your email"
           />
         </Field>
 
@@ -124,23 +122,22 @@ export function SessionDemo() {
           <Input
             value={formValues.message}
             onChange={(e) => setFormValues({ ...formValues, message: e.target.value })}
-            placeholder="Enter a message"
           />
         </Field>
 
         <div className={styles.buttonGroup}>
           <Button appearance="primary" icon={<SaveFilled />} onClick={handleSave}>
-            Save to Session
+            Save to session
           </Button>
           <Button appearance="subtle" icon={<DeleteFilled />} onClick={handleClear}>
-            Clear Session
+            Clear session
           </Button>
         </div>
 
         {data && (
           <>
             <Text weight="semibold" style={{ marginTop: '16px' }}>
-              Stored Session Data:
+              Stored session data:
             </Text>
             <div className={styles.dataDisplay}>{JSON.stringify(data, null, 2)}</div>
             <div className={styles.status}>

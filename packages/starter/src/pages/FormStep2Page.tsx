@@ -1,18 +1,20 @@
 import { useState, useEffect, useRef } from 'react';
 import {
   Button,
-  Input,
   Field,
   Card,
   Title1,
   Title2,
   Text,
+  Radio,
+  RadioGroup,
   makeStyles,
   tokens,
 } from '@fluentui/react-components';
 import { ArrowLeftFilled, ArrowRightFilled } from '@fluentui/react-icons';
 import { useNavigate } from 'react-router-dom';
 import { usePrototypeData } from '../hooks/usePrototypeData';
+import { FormDisclaimer } from '../components/FormDisclaimer';
 
 const useStyles = makeStyles({
   container: {
@@ -46,6 +48,9 @@ const useStyles = makeStyles({
   stepActive: {
     backgroundColor: tokens.colorBrandBackground,
   },
+  stepComplete: {
+    backgroundColor: tokens.colorPaletteGreenBackground3,
+  },
   buttonGroup: {
     display: 'flex',
     gap: '12px',
@@ -53,25 +58,21 @@ const useStyles = makeStyles({
 });
 
 interface FormData {
-  name: string;
   email: string;
-  company: string;
-  role: string;
-  message: string;
+  accountType: string;
+  fullName: string;
 }
 
 export function FormStep2Page() {
   const styles = useStyles();
   const navigate = useNavigate();
   const { data, setData, loading } = usePrototypeData<FormData>('multi-step-form');
-  const firstInputRef = useRef<HTMLInputElement>(null);
+  const radioGroupRef = useRef<HTMLDivElement>(null);
 
   const [formValues, setFormValues] = useState<FormData>({
-    name: '',
     email: '',
-    company: '',
-    role: '',
-    message: '',
+    accountType: '',
+    fullName: '',
   });
 
   useEffect(() => {
@@ -81,11 +82,12 @@ export function FormStep2Page() {
     console.log('FormStep2 loaded, data from session:', data);
     if (data) {
       setFormValues(data);
-      firstInputRef.current?.focus();
+      // Focus the RadioGroup container
+      setTimeout(() => radioGroupRef.current?.focus(), 0);
     } else {
       // Redirect to step 1 if no data
       console.warn('No data found, redirecting to step 1');
-      navigate('/form');
+      navigate('/form/step-1');
     }
   }, [data, loading, navigate]);
 
@@ -93,8 +95,7 @@ export function FormStep2Page() {
 
   const validate = () => {
     const newErrors: Partial<FormData> = {};
-    if (!formValues.company.trim()) newErrors.company = 'Company is required';
-    if (!formValues.role.trim()) newErrors.role = 'Role is required';
+    if (!formValues.accountType) newErrors.accountType = 'Please select an account type';
     return newErrors;
   };
 
@@ -110,7 +111,7 @@ export function FormStep2Page() {
       navigate('/form/step-3');
     } catch (error) {
       console.error('Failed to save form data:', error);
-      setErrors({ company: 'Failed to save data. Please try again.' });
+      setErrors({ accountType: 'Failed to save data. Please try again.' });
     }
   };
 
@@ -118,63 +119,49 @@ export function FormStep2Page() {
     try {
       // Save current form data before going back
       await setData(formValues);
-      navigate('/form');
+      navigate('/form/step-1');
     } catch (error) {
       console.error('Failed to save form data:', error);
       // Navigate anyway even if save fails
-      navigate('/form');
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleNext();
+      navigate('/form/step-1');
     }
   };
 
   return (
     <div className={styles.container}>
-      <Title1>Multi-Step Form - Step 2</Title1>
+      <FormDisclaimer />
+      
+      <Title1>Step 2 of 3</Title1>
 
       <Card className={styles.card}>
         <div className={styles.content}>
           <div className={styles.progress}>
-            <div className={`${styles.step} ${styles.stepActive}`} />
+            <div className={`${styles.step} ${styles.stepComplete}`} />
             <div className={`${styles.step} ${styles.stepActive}`} />
             <div className={styles.step} />
           </div>
 
-          <Title2>Professional Details</Title2>
-          <Text>Tell us about your work.</Text>
+          <Title2>Account type</Title2>
 
           <Field
-            label="Company"
             required
-            validationMessage={errors.company}
-            validationState={errors.company ? 'error' : undefined}
+            validationMessage={errors.accountType}
+            validationState={errors.accountType ? 'error' : undefined}
           >
-            <Input
-              ref={firstInputRef}
-              value={formValues.company}
-              onChange={(e) => setFormValues({ ...formValues, company: e.target.value })}
-              onKeyDown={handleKeyDown}
-              placeholder="Microsoft"
-            />
-          </Field>
-
-          <Field
-            label="Role"
-            required
-            validationMessage={errors.role}
-            validationState={errors.role ? 'error' : undefined}
-          >
-            <Input
-              value={formValues.role}
-              onChange={(e) => setFormValues({ ...formValues, role: e.target.value })}
-              onKeyDown={handleKeyDown}
-              placeholder="Product Designer"
-            />
+            <RadioGroup
+              ref={radioGroupRef as any}
+              value={formValues.accountType}
+              onChange={(_, data) => setFormValues({ ...formValues, accountType: data.value })}
+            >
+              <Radio
+                value="Individual"
+                label="Individual"
+              />
+              <Radio
+                value="Organization"
+                label="Organization"
+              />
+            </RadioGroup>
           </Field>
 
           <div className={styles.buttonGroup}>
@@ -191,7 +178,7 @@ export function FormStep2Page() {
               iconPosition="after"
               onClick={handleNext}
             >
-              Next Step
+              Continue
             </Button>
           </div>
         </div>

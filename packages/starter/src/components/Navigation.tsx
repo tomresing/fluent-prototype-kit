@@ -56,10 +56,10 @@ export function Navigation() {
           Home
         </Tab>
         <Tab value="session" icon={<DatabaseFilled />}>
-          Session Demo
+          Session demo
         </Tab>
         <Tab value="form" icon={<FormFilled />}>
-          Multi-Step Form
+          Multi-step form
         </Tab>
       </TabList>
     </nav>

@@ -11,6 +11,7 @@ import {
 import { CheckmarkCircleFilled, HomeFilled } from '@fluentui/react-icons';
 import { useNavigate } from 'react-router-dom';
 import { usePrototypeData } from '../hooks/usePrototypeData';
+import { FormDisclaimer } from '../components/FormDisclaimer';
 
 const useStyles = makeStyles({
   container: {
@@ -54,11 +55,9 @@ const useStyles = makeStyles({
 });
 
 interface FormData {
-  name: string;
   email: string;
-  company: string;
-  role: string;
-  message: string;
+  accountType: string;
+  fullName: string;
 }
 
 export function ConfirmationPage() {
@@ -74,7 +73,7 @@ export function ConfirmationPage() {
     if (data) {
       setFormData(data);
     } else {
-      navigate('/form');
+      navigate('/form/step-1');
     }
   }, [data, loading, navigate]);
 
@@ -89,6 +88,8 @@ export function ConfirmationPage() {
 
   return (
     <div className={styles.container}>
+      <FormDisclaimer />
+      
       <div className={styles.successIcon}>
         <CheckmarkCircleFilled />
       </div>
@@ -97,48 +98,29 @@ export function ConfirmationPage() {
 
       <Card className={styles.card}>
         <div className={styles.content}>
-          <Title2>Form Submitted</Title2>
-          <Text>
-            Thank you for completing the multi-step form. Here's a summary of the information you
-            provided:
-          </Text>
+          <Title2>You're all set</Title2>
 
           <div className={styles.dataDisplay}>
-            <div className={styles.dataRow}>
-              <Text className={styles.label}>Name:</Text>
-              <Text>{formData.name}</Text>
-            </div>
             <div className={styles.dataRow}>
               <Text className={styles.label}>Email:</Text>
               <Text>{formData.email}</Text>
             </div>
             <div className={styles.dataRow}>
-              <Text className={styles.label}>Company:</Text>
-              <Text>{formData.company}</Text>
+              <Text className={styles.label}>Account Type:</Text>
+              <Text>{formData.accountType}</Text>
             </div>
             <div className={styles.dataRow}>
-              <Text className={styles.label}>Role:</Text>
-              <Text>{formData.role}</Text>
+              <Text className={styles.label}>Full Name:</Text>
+              <Text>{formData.fullName}</Text>
             </div>
-            {formData.message && (
-              <div className={styles.dataRow}>
-                <Text className={styles.label}>Message:</Text>
-                <Text>{formData.message}</Text>
-              </div>
-            )}
           </div>
-
-          <Text size={300}>
-            This data was preserved across all three steps using session storage. Try refreshing
-            the page - your data is still here!
-          </Text>
 
           <Button
             appearance="primary"
             icon={<HomeFilled />}
             onClick={handleStartOver}
           >
-            Return Home & Clear Data
+            Return home & clear data
           </Button>
         </div>
       </Card>
