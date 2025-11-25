@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:all": "concurrently \"npm run dev:server\" \"npm run dev\" --names \"API,APP\" --prefix-colors \"blue,green\"",
+    "dev:server": "npm run dev --workspace=@fluent-prototype-kit/runtime",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
@@ -20,6 +22,7 @@
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
+    "concurrently": "^9.0.1",
     "typescript": "^5.5.4",
     "vite": "^5.4.3"
   }

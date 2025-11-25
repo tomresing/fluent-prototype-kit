@@ -7,12 +7,14 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "npm run dev --workspace=packages/starter",
+    "dev": "npm run dev:all --workspace=packages/starter",
+    "dev:server": "npm run dev --workspace=@fluent-prototype-kit/runtime",
+    "dev:app": "npm run dev --workspace=packages/starter",
     "build": "npm run build --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
     "lint": "eslint packages/**/*.{ts,tsx} --fix",
     "format": "prettier --write \"packages/**/*.{ts,tsx,json,md}\"",
-    "clean": "rimraf packages/*/dist packages/*/.turbo node_modules/.cache"
+    "clean": "rimraf packages/*/dist packages/*/.turbo node_modules/.cache .sessions"
   },
   "repository": {
     "type": "git",
