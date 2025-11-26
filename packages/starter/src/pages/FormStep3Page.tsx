@@ -6,7 +6,6 @@ import {
   Card,
   Title1,
   Title2,
-  Text,
   makeStyles,
   tokens,
 } from '@fluentui/react-components';

@@ -13,6 +13,7 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x, 20.x]
+      fail-fast: false  # Continue running other matrix jobs if one fails
 
     steps:
       - uses: actions/checkout@v4
@@ -29,8 +30,9 @@ jobs:
       - name: Lint
         run: npm run lint
       
-      - name: Build
-        run: npm run build
+      - name: Type check
+        run: npm run build --workspaces --if-present
+        # Build includes tsc which does type checking
       
       - name: Test
         run: npm test

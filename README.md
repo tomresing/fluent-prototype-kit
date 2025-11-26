@@ -53,7 +53,8 @@ fluent-prototype-kit/
 ## Documentation
 
 - **[Getting started](./docs/getting-started.md)** - Setup, customization, and examples
-- **[Implementation plan](./IMPLEMENTATION_PLAN_REACT.md)** - Roadmap and current status
+- **[Implementation plan](./docs/IMPLEMENTATION_PLAN.md)** - Roadmap and current status
+- **[Changelog](./docs/CHANGELOG.md)** - Release history
 - **[Contributing](./CONTRIBUTING.md)** - How to contribute
 
 **External resources**

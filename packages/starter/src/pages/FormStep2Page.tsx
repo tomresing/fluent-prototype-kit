@@ -1,11 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Button,
   Field,
   Card,
   Title1,
   Title2,
-  Text,
   Radio,
   RadioGroup,
   makeStyles,
@@ -149,7 +148,7 @@ export function FormStep2Page() {
             validationState={errors.accountType ? 'error' : undefined}
           >
             <RadioGroup
-              ref={radioGroupRef as any}
+              ref={radioGroupRef as React.RefObject<HTMLDivElement>}
               value={formValues.accountType}
               onChange={(_, data) => setFormValues({ ...formValues, accountType: data.value })}
             >

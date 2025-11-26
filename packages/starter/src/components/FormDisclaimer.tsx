@@ -1,4 +1,4 @@
-import { MessageBar, MessageBarBody, makeStyles, tokens } from '@fluentui/react-components';
+import { MessageBar, MessageBarBody, makeStyles } from '@fluentui/react-components';
 import { InfoRegular } from '@fluentui/react-icons';
 
 const useStyles = makeStyles({

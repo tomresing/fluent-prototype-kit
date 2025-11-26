@@ -9,7 +9,7 @@ interface UsePrototypeDataResult<T> {
   refresh: () => Promise<void>;
 }
 
-export function usePrototypeData<T = any>(key: string): UsePrototypeDataResult<T> {
+export function usePrototypeData<T = unknown>(key: string): UsePrototypeDataResult<T> {
   const [data, setDataState] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);

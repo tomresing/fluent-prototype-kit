@@ -128,6 +128,6 @@ Available themes: `webLightTheme`, `webDarkTheme`, `teamsLightTheme`, `teamsDark
 
 ## Next steps
 
-- Review the [implementation plan](../IMPLEMENTATION_PLAN_REACT.md) for roadmap
+- Review the [implementation plan](./IMPLEMENTATION_PLAN.md) for roadmap
 - Explore [Fluent UI React v9 components](https://react.fluentui.dev/)
 - Check [Fluent 2 design guidelines](https://fluent2.microsoft.design/)

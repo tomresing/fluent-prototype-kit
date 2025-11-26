@@ -3,17 +3,13 @@ import session from 'express-session';
 import createFileStore from 'session-file-store';
 import cors from 'cors';
 import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const FileStore = createFileStore(session);
 
 // Extend session type
 declare module 'express-session' {
   interface SessionData {
-    prototypeData: Record<string, any>;
+    prototypeData: Record<string, unknown>;
   }
 }
 

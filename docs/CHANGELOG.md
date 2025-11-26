@@ -85,4 +85,4 @@
 
 ---
 
-See [IMPLEMENTATION_PLAN_REACT.md](./IMPLEMENTATION_PLAN_REACT.md) for roadmap and next steps.
+See [Implementation plan](./IMPLEMENTATION_PLAN.md) for roadmap and next steps.
