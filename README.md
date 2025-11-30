@@ -31,11 +31,10 @@ Build interactive prototypes with Fluent UI React v9 components. Session-based d
 - Multi-page routing with React Router
 - Server-side session management
 - Multi-step form patterns
-- TypeScript and fast HMR with Vite
+- TypeScript and live updates with Vite development server
 
-**Planned**
-- Pre-built component patterns (FormField, DataTable)
-- CLI tools for scaffolding
+**Planned features**
+- Command line tools for scaffolding
 - Plugin system
 
 ## Project structure

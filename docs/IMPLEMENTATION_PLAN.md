@@ -27,7 +27,7 @@ Create a rapid prototyping toolkit for Microsoft Fluent Design System using Flue
 - Node.js 18+
 
 **Development**
-- Vite dev server with HMR
+- Vite for live updates without a full page reload through Hot Module Replacement (HMR)
 - ESLint and Prettier
 - Jest and React Testing Library
 
@@ -115,15 +115,6 @@ Working prototype with:
 - PageLayout wrapper component
 
 ## Next phases
-
-### Milestone 1.7: Component patterns (Next)
-
-**Goals**
-- [ ] FormField wrapper component
-- [ ] DataTable with sorting and filtering
-- [ ] PageHeader component
-- [ ] Modal dialog patterns
-- [ ] Form validation helpers
 
 ### Milestone 1.8: CLI tool
 
